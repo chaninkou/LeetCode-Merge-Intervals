@@ -10,15 +10,18 @@ public class MergeIntervalsFunction {
             return intervals;
         }
         
+        // Sort the whole 2D array by the 0 index
         Arrays.sort(intervals, (arr1,arr2) -> Integer.compare(arr1[0], arr2[0]));
         
         int[] newInterval = intervals[0];
         
         List<int[]> list = new ArrayList<>();
         
+        // Add the first element of the array
         list.add(newInterval);
         
         for(int i = 0; i < intervals.length; i++){
+        	// Since we have the reference to it, we will change the value too
             if(intervals[i][0] <= newInterval[1]){
                 newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
             } else {
