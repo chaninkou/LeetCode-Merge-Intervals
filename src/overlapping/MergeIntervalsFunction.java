@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MergeIntervalsFunction {
-	public int[][] merge(int[][] intervals) {
+	public int[][] merge2(int[][] intervals) {
         if(intervals.length <= 1 || intervals == null){
             return intervals;
         }
@@ -29,5 +29,55 @@ public class MergeIntervalsFunction {
         }
         
         return list.toArray(new int[list.size()][]);
+    }
+	
+	// Great solution, actually thought of this solution
+    public int[][] merge(int[][] intervals) {
+        if(intervals.length <= 1 || intervals == null){
+            return intervals;
+        }
+    
+        // How many got merge
+        int mergeCount = 0;
+        
+        for(int i = 0; i < intervals.length; i++){
+            for(int j = i + 1; j < intervals.length; j++){
+                int a0 = intervals[i][0];
+                int a1 = intervals[i][1];
+                
+                int b0 = intervals[j][0];
+                int b1 = intervals[j][1];
+                
+                // Base case, fail if they break the rule
+                if(a0 > b1 || a1 < b0){
+                    continue;
+                }
+                
+                intervals[j][0] = Math.min(a0, b0);
+                intervals[j][1] = Math.max(a1,b1);
+                
+                mergeCount++;
+                
+                intervals[i][0] = Integer.MIN_VALUE;
+                
+                // Whenever we changed an element, stop comparing current to next element
+                break;
+            }    
+        }
+        
+        int[][] answer = new int[intervals.length - mergeCount][2];
+        
+        int j = 0;
+        
+        for(int i = 0; i < intervals.length; i++){
+        	// If its min_value, we know we changed it earlier
+            if(intervals[i][0] != Integer.MIN_VALUE){
+                answer[j] = intervals[i];
+                j++;
+            }
+
+        }
+        
+        return answer;
     }
 }
