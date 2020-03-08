@@ -11,7 +11,11 @@ public class MergeIntervalsFunction {
         }
         
         // Sort the whole 2D array by the 0 index
-        Arrays.sort(intervals, (arr1,arr2) -> Integer.compare(arr1[0], arr2[0]));
+        //Arrays.sort(intervals, (arr1,arr2) -> Integer.compare(arr1[0], arr2[0]));
+        // Another way to do it
+        Arrays.sort(intervals, (arr1,arr2) -> arr1[0] - arr2[0]);
+        
+        System.out.println(Arrays.deepToString(intervals));
         
         int[] newInterval = intervals[0];
         
@@ -21,8 +25,9 @@ public class MergeIntervalsFunction {
         list.add(newInterval);
         
         for(int i = 0; i < intervals.length; i++){
-        	// Since we have the reference to it, we will change the value too
+        	// ex: [1,3] [2,4] = [1,4]
             if(intervals[i][0] <= newInterval[1]){
+            	// Since we have the reference to it, we will change the value too
                 newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
             } else {
                 newInterval = intervals[i];
@@ -61,6 +66,7 @@ public class MergeIntervalsFunction {
                 
                 mergeCount++;
                 
+                // Change the value to mark we changed it
                 intervals[i][0] = Integer.MIN_VALUE;
                 
                 // Whenever we changed an element, stop comparing current to next element
@@ -68,6 +74,7 @@ public class MergeIntervalsFunction {
             }    
         }
         
+        // The final answer will only have certain amount of elements
         int[][] answer = new int[intervals.length - mergeCount][2];
         
         int j = 0;

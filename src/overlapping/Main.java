@@ -10,6 +10,6 @@ public class Main {
 		
 		MergeIntervalsFunction solution = new MergeIntervalsFunction();
 		
-		System.out.println("Soltuion: " + Arrays.deepToString(solution.merge(intervals)));
+		System.out.println("Soltuion: " + Arrays.deepToString(solution.merge2(intervals)));
 	}
 }
