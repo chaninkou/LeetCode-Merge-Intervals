@@ -1,11 +1,13 @@
-package overlapping;
+package leetcode56;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class MergeIntervalsFunction {
+	// o(nlogn) time since we sorted
 	public int[][] merge2(int[][] intervals) {
+		// Error checking
         if(intervals.length <= 1 || intervals == null){
             return intervals;
         }
@@ -15,7 +17,7 @@ public class MergeIntervalsFunction {
         // Another way to do it
         Arrays.sort(intervals, (arr1,arr2) -> arr1[0] - arr2[0]);
         
-        System.out.println(Arrays.deepToString(intervals));
+        System.out.println("After sorting: " + Arrays.deepToString(intervals));
         
         int[] newInterval = intervals[0];
         
