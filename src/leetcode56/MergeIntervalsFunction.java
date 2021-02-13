@@ -23,7 +23,7 @@ public class MergeIntervalsFunction {
         
         List<int[]> list = new ArrayList<>();
         
-        // Add the first element of the array
+        // Add the first element as starting point to compare
         list.add(newInterval);
         
         for(int i = 0; i < intervals.length; i++){
